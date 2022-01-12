@@ -1,0 +1,21 @@
+---
+kind: pipeline
+type: kubernetes
+name: build
+
+platform:
+  os: linux
+  arch: arm
+
+
+steps:
+- name: docker  
+  image: plugins/docker
+  settings:
+    username: ${REG_NAME}
+    password: ${REG_PASSWORD}
+    repo: bboysoul/drone-ddnotice
+    registry: docker.io
+    tags:
+      - latest
+      - v1.0.10
