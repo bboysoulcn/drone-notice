@@ -6,6 +6,9 @@ import base64
 import urllib.parse
 import json
 import sys
+import os
+
+
 
 
 
@@ -38,11 +41,15 @@ def send_msg(msg, title, ding_secret, dingding_base_url):
 
 
 if __name__ == "__main__":
-    title = sys.argv[1]
-    msg = sys.argv[2]
-    dingding_base_url = sys.argv[3]
-    ding_secret = sys.argv[4]
-    try:
-        send_msg(msg, title, ding_secret, dingding_base_url)
-    except Exception as e:
-        print(e)
+    dingding_base_url = os.getenv("PLUGIN_DDBASEURL")
+    ding_secret = os.getenv("PLUGIN_DDSECRET")
+    if os.getenv("DRONE_BUILD_STATUS") =="success":
+        try:
+            send_msg("build is success", "drone build", ding_secret, dingding_base_url)
+        except Exception as e:
+            print(e)
+    else:
+        try:
+            send_msg("build is failed", "drone build", ding_secret, dingding_base_url)
+        except Exception as e:
+            print(e)
