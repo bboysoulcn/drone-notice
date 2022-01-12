@@ -12,8 +12,10 @@ steps:
 - name: docker  
   image: plugins/docker
   settings:
-    username: ${REG_NAME}
-    password: ${REG_PASSWORD}
+    username: 
+      from_secret: REG_NAME
+    password: 
+      from_secret: REG_PASSWORD
     repo: bboysoul/drone-ddnotice
     registry: docker.io
     tags:
