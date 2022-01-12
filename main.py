@@ -37,7 +37,7 @@ def send_msg(msg, title, ding_secret, dingding_base_url):
 if __name__ == "__main__":
     dingding_base_url = os.getenv("PLUGIN_DDBASEURL", default="")
     ding_secret = os.getenv("PLUGIN_DDSECRET", default="")
-    if os.getenv("CI_BUILD_STATUS",default="") == "success":
+    if os.getenv("DRONE_BUILD_STATUS",default="") == "success":
         try:
             send_msg("build is success", "drone build",
                      ding_secret, dingding_base_url)
