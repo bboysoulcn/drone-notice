@@ -3,4 +3,4 @@ WORKDIR /app
 ADD requirements.txt /app 
 RUN pip3 install -r requirements.txt  -i https://mirrors.aliyun.com/pypi/simple
 ADD . /app
-ENTRYPOINT script.sh
+CMD [ "sh","script.sh" ]
