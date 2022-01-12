@@ -5,14 +5,7 @@ import hashlib
 import base64
 import urllib.parse
 import json
-import sys
 import os
-
-
-
-
-
-
 
 def send_msg(msg, title, ding_secret, dingding_base_url):
     ding_secret = ding_secret
@@ -41,15 +34,19 @@ def send_msg(msg, title, ding_secret, dingding_base_url):
 
 
 if __name__ == "__main__":
-    dingding_base_url = os.getenv("PLUGIN_DDBASEURL")
-    ding_secret = os.getenv("PLUGIN_DDSECRET")
+    dingding_base_url = os.getenv("PLUGIN_DDBASEURL",default="")
+    ding_secret = os.getenv("PLUGIN_DDSECRET",default="")
     if os.getenv("DRONE_BUILD_STATUS") =="success":
         try:
             send_msg("build is success", "drone build", ding_secret, dingding_base_url)
+            print("msg send success")
         except Exception as e:
             print(e)
+            print("msg send failed")
     else:
         try:
             send_msg("build is failed", "drone build", ding_secret, dingding_base_url)
+            print("msg send success")
         except Exception as e:
             print(e)
+            print("msg send failed")
